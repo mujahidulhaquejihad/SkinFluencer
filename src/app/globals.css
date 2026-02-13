@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fef7f8;
+  --foreground: #2d1f24;
+  --muted: #7d6b72;
+  --border: #f0dce2;
+  --card: #ffffff;
+  --accent: #b84d6b;
+  --accent-foreground: #fef7f8;
+  --brand: #c97b8b;
+}
+
+.dark {
+  --background: #1f1418;
+  --foreground: #fce8ec;
+  --muted: #b89ba3;
+  --border: #4a3540;
+  --card: #2d2025;
+  --accent: #e8a4b8;
+  --accent-foreground: #1f1418;
+  --brand: #d4a5a5;
+}
+
+/* Base styles - work even if Tailwind layers fail */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+}
+
+/* Mobile: prevent zoom on input focus (iOS) – keep inputs at least 16px */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="number"],
+textarea {
+  font-size: 16px;
+}
+@media (min-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    font-size: inherit;
+  }
+}
+
+/* Touch-friendly: reduce hover-only reliance */
+@media (hover: none) {
+  .zoom-container:hover img {
+    transform: none;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .safe-area-pt {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+/* Zoom container for PDP images */
+.zoom-container {
+  overflow: hidden;
+}
+.zoom-container img {
+  transition: transform 0.3s ease;
+}
+.zoom-container:hover img {
+  transform: scale(1.08);
+}
